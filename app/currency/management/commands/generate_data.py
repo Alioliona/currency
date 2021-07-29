@@ -6,7 +6,7 @@ import random
 
 
 class Command(BaseCommand):
-    helpme = 'Generating random data'
+    help = 'Generating random data' # noqa
 
     def handle(self, *args, **options):
         fake = Faker()
