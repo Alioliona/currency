@@ -2,14 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title> </title>
 </head>
 <body>
+
+<a href = '/currency/bank-create/'>Add another Bank</a>
+
+<p>
+  <a href = '/currency/contactus-create/'>Need our help?</a>
+</p>
+
+
+{% for bank in objects %}
 <p>
 
-{{names}}
+<p> ID: {{ bank.id }} </p>
+<p> Name: {{ bank.name }} </p>
+<p> URL: {{ bank.url }} </p>
+<p> Support: {{ bank.support }} </p>
 
+    <a href = "/currency/bank-update/{{ bank.id }}/"> Edit </a>
 <p/>
+
+{% endfor %}
 
 
 </body>
