@@ -1,10 +1,11 @@
 from django.shortcuts import render
 
 from currency.models import Rate, Bank, ContactUs
-from currency.forms import BankForm, RateForm, ContactUsCreate
+from currency.forms import BankForm, RateForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.core.mail import send_mail
+
 
 def index(request):
     return render(request, 'index.html')
@@ -71,11 +72,9 @@ class CreateContactUs(CreateView):
     def form_valid(self, form):
         data = form.cleaned_data
         body = f'''
-        From: {data['email_from']}
-        Topic: {data['subject']}
-        
-        Message: 
-        {data['message']}
+            From: {data['email_from']}
+            Topic: {data['subject']}
+            Message: {data['message']}
         '''
 
         send_mail(

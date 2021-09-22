@@ -92,3 +92,4 @@ class ContactUsAdmin(admin.ModelAdmin):
 
 admin.site.register(ContactUs, ContactUsAdmin)
 
+# flake8: noqa
