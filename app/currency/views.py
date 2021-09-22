@@ -1,9 +1,7 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render
 
 from currency.models import Rate, Bank, ContactUs
-from currency.forms import BankForm, ContactForm, RateForm
-from annoying.functions import get_object_or_None
+from currency.forms import BankForm, RateForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
@@ -41,7 +39,7 @@ class RateListView(ListView):
 #     return render(request, 'rate_details.html', context=context)
 
 class RateDetailView(DetailView):
-    template_name='rate_details.html'
+    template_name = 'rate_details.html'
     queryset = Rate.objects.all()
 
 
@@ -97,7 +95,7 @@ class BankListView(ListView):
 
 
 class BankDetailsView(DetailView):
-    template_name='bank_details.html'
+    template_name = 'bank_details.html'
     queryset = Bank.objects.all()
 
 
