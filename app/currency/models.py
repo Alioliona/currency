@@ -13,3 +13,10 @@ class ContactUs(models.Model):
     email_from = models.EmailField(max_length=254)
     subject = models.CharField(max_length=30)
     message = models.TextField()
+
+
+# 3 banks added to Bank
+class Bank(models.Model):  # ht7part1
+    name = models.CharField(max_length=30)
+    url = models.URLField()
+    support = models.EmailField(max_length=254)

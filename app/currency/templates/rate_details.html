@@ -1,10 +1,59 @@
+<!--<p> ID: {{object.id}}</p>-->
+<!--<p> Bank: {{object.source}}</p>-->
+<!--<p> Buy: {{object.buy}}</p>-->
+<!--<p> Sale: {{object.sale}}</p>-->
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+td, th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: azure;
+}
+</style>
 </head>
 <body>
-$END$
+
+<h2>Banks & currency</h2>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Data</th>
+  </tr>
+  <tr>
+    <td>ID:</td>
+    <td>{{object.id}}</td>
+  </tr>
+  <tr>
+    <td>Bank:</td>
+    <td>{{object.source}}</td>
+  </tr>
+  <tr>
+    <td>Currency:</td>
+    <td>{{object.currency_type}}</td>
+  </tr>
+  <tr>
+    <td>Buy:</td>
+    <td>{{object.buy}}</td>
+  </tr>
+  <tr>
+    <td>Sell:</td>
+    <td>{{object.sale}}</td>
+  </tr>
+</table>
+
 </body>
 </html>
