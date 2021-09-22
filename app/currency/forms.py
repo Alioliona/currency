@@ -24,7 +24,7 @@ class BankForm(forms.ModelForm):
         )
 
 
-class ContactForm(forms.ModelForm):
+class ContactUsCreate(forms.ModelForm):
     class Meta:
         model = ContactUs
         fields = (
@@ -32,3 +32,6 @@ class ContactForm(forms.ModelForm):
             'subject',
             'message',
         )
+
+    # def save(self, commit=True):
+    #     return super().save(commit)
