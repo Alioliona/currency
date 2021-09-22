@@ -1,16 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+<a href ="{% url 'currency:bank-create' %}">Add another Bank</a>
+
 <p>
+  <a href = "{% url 'currency:contact-us' %}">Need our help?</a>
+</p>
 
-{{names}}
 
+{% for bank in object_list %}
+
+<p> ID: {{ bank.id }} </p>
+<p> Name: {{ bank.name }} </p>
+<p> URL: {{ bank.url }} </p>
+<p> Support: {{ bank.support }} </p>
+<p>
+    <a href = "{% url 'currency:bank-update' bank.id %}"> Edit </a>
+</p>
+<p>
+    <a href = "{% url 'currency:banks-details' bank.id %}"> Summary bank details </a>
 <p/>
 
+{% endfor %}
 
-</body>
-</html>
+{% endblock main_content %}

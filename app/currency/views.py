@@ -1,59 +1,88 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 
-from currency.models import Rate, Bank
+from currency.models import Rate, Bank, ContactUs
+from currency.forms import BankForm, RateForm
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.core.mail import send_mail
 
 
-def banks_list(request):  # ht7part2
+def index(request):
+    return render(request, 'index.html')
+
+
+class RateListView(ListView):
+    template_name = 'rate_list.html'
+    queryset = Rate.objects.all()
+
+
+class RateDetailView(DetailView):
+    template_name = 'rate_details.html'
+    queryset = Rate.objects.all()
+
+
+class RateCreateView(CreateView):
+    template_name = 'rate_create.html'
+    queryset = Rate.objects.all()
+    success_url = reverse_lazy('currency:rate-list')
+    form_class = RateForm
+
+
+class BankListView(ListView):
+    template_name = 'bank_list.html'
     queryset = Bank.objects.all()
 
-    names = []
-    for bank in queryset:
-        names.append(bank.name)
 
-    context = {
-        'names': names,
-    }
-    return render(request, "bank_list.html", context=context)
+class BankDetailsView(DetailView):
+    template_name = 'bank_details.html'
+    queryset = Bank.objects.all()
 
 
-def banks_details(request, pk2):  # ht7part3
-
-    # id_ = request.GET['id']
-    # bank = Bank.objects.get(pk = pk2)
-
-    bank = get_object_or_404(Bank, pk=pk2)
-
-    context = {
-        'object': bank,
-    }
-    return render(request, "bank_details.html", context=context)
+class BankCreateView(CreateView):
+    template_name = 'rate_create.html'
+    queryset = Bank.objects.all()
+    success_url = reverse_lazy('currency:banks-list')
+    form_class = BankForm
 
 
-# def rate_list(request):
-#     queryset = Rate.objects.all()
-#
-#     # print(queryset.query)
-#     # ids = []
-#     # for rate in queryset:
-#     #     ids.append(rate.id)
-#
-#     context = {
-#             'objects' : queryset,
-#     }
-#
-#     return render(request, 'rate_list.html', context=context)
+class BankUpdateView(UpdateView):
+    template_name = 'bank_update.html'
+    queryset = Bank.objects.all()
+    success_url = reverse_lazy('currency:banks-list')
+    form_class = BankForm
 
-def rate_details(request, pk):
-    # id_ = request.GET['id']
-    # try:
-    #     rate = Rate.objects.get(pk=pk)
-    # except Rate.DoesNotExist:
-    #     raise Http404(f"Rate does not exist with id {pk}")
 
-    rate = get_object_or_404(Rate, pk=pk)
+class RateDeleteView(DeleteView):
+    template_name = 'bank_confirm_delete.html'
+    queryset = Bank.objects.all()
+    success_url = reverse_lazy('currency:banks-list')
 
-    context = {
-        'object': rate,
-    }
 
-    return render(request, 'rate_details.html', context=context)
+class CreateContactUs(CreateView):
+    model = ContactUs
+    fields = (
+        'email_from',
+        'subject',
+        'message',
+    )
+    # form_class = ContactUsCreate
+    success_url = reverse_lazy('index')
+    # template = '.html'
+
+    def form_valid(self, form):
+        data = form.cleaned_data
+        body = f'''
+            From: {data['email_from']}
+            Topic: {data['subject']}
+            Message: {data['message']}
+        '''
+
+        send_mail(
+            'Contact Us from Client',
+            body,
+            'testsend.alio@gmail.com',
+            ['smash.kudi@gmail.com'],
+            fail_silently=False,
+        )
+
+        return super().form_valid(form)

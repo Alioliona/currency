@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-
-{% for rate in objects %}
-
-<p>
-    ID: {{rate.id}}
-    Buy: {{rate.buy}}
-    Sale: {{rate.sale}}
-</p>
-
-{% endfor %}
-
-</body>
-</html>
+{% block main_content %}
+    {% for rate in object_list %}
+        <p>
+            ID: {{rate.id}}
+            Buy: {{rate.buy}}
+            Sale: {{rate.sale}}
+            <a href="{% url 'currency:rate-create' %}">Add</a>
+            <a href="{% url 'currency:rate-details' pk=rate.id %}">Details</a>
+        </p>
+    {% endfor %}
+{% endblock main_content %}
