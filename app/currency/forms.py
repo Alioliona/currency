@@ -1,6 +1,17 @@
 from django import forms
 
-from currency.models import Bank, ContactUs
+from currency.models import Bank, ContactUs, Rate
+
+
+class RateForm(forms.ModelForm):
+    class Meta:
+        model = Rate
+        fields = (
+            'currency_type',
+            'sale',
+            'buy',
+            'source',
+        )
 
 
 class BankForm(forms.ModelForm):

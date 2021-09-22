@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<p> ID: {{ object.id }} </p>
-<p> Name: {{ object.name }} </p>
-<p> URL: {{ object.url }} </p>
-<p> Support: {{ object.support }} </p>
+{% block main_content %}
+<!--<p> ID: {{ bank.id }} </p>-->
+<p> Name: {{ bank.name }} </p>
+<p> URL: {{ bank.url }} </p>
+<p> Support: {{ bank.support }} </p>
 
-</body>
-</html>
+    <a href = "{% url 'currency:bank-update' bank.id %}"> Edit </a>
+
+{% endblock main_content %}

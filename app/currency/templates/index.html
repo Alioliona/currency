@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <a href="{% url 'currency:rate-list' %}">Rate List</a>
+<p>
+    <a href="{% url 'currency:contact-us' %}">Contact Us</a>
+</p>
+
+<p>
+    <a href="{% url 'currency:banks-list' %}">Banks</a>
+</p>
+{% endblock main_content %}

@@ -12,7 +12,7 @@ class Rate(models.Model):
 class ContactUs(models.Model):
     email_from = models.EmailField(max_length=254)
     subject = models.CharField(max_length=30)
-    message = models.TextField()
+    message = models.CharField(max_length=1024)
 
 
 # 3 banks added to Bank
